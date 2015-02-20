@@ -1,5 +1,6 @@
-package scrubbing.brush
+package chia
 
+import chia.MeasureController;
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

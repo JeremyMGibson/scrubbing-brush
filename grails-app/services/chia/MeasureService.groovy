@@ -1,4 +1,4 @@
-package scrubbing.brush
+package chia
 
 import grails.transaction.Transactional
 
