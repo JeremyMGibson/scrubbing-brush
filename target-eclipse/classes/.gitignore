@@ -1,4 +1,3 @@
-/uglifyjs/
 /asset/
 /dbdoc/
 /grails/
@@ -7,6 +6,7 @@
 /javascripts/
 /org/
 /spring/
+/uglifyjs/
 /DataSource$_run_closure1.class
 /DataSource$_run_closure2.class
 /DataSource$_run_closure3.class
@@ -80,3 +80,5 @@
 /JQueryTagLib$_closure4.class
 /JQueryTagLib$_closure5.class
 /JQueryTagLib.class
+/data integrity/
+/scrubbing/
