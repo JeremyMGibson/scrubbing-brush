@@ -89,6 +89,8 @@ grails.assets.less.compile = 'less4j'
 grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
 grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
 
+grails.plugins.twitterbootstrap.fixtaglib = true
+
 environments {
     development {
         grails.logging.jul.usebridge = true
