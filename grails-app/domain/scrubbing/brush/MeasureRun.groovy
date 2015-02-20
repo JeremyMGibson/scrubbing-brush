@@ -1,10 +1,9 @@
 package scrubbing.brush
 
-import java.util.Formatter.DateTime
 
 class MeasureRun {
 	
-	DateTime runtime
+	Date runtime
 	int oldErrors
 	int newErrors
 	int fixedErrors
