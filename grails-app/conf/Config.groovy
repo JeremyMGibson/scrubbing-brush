@@ -94,6 +94,8 @@ grails.plugins.twitterbootstrap.fixtaglib = true
 environments {
     development {
         grails.logging.jul.usebridge = true
+		grails.gsp.enable.reload=true
+		disable.auto.recompile=false
     }
     production {
         grails.logging.jul.usebridge = false

@@ -82,6 +82,7 @@
 				if (cp.matches) sb << ' pattern="${' << "${domainInstance}.constraints.${property.name}.matches" << '}"'
 				if (isRequired()) sb << ' required=""'
 				sb << ' value="${' << "${domainInstance}?.${property.name}" << '}"'
+				sb << ' class="form-control"'
 				sb << '/>'
 			}
 			sb as String

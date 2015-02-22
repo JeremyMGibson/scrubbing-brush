@@ -5,7 +5,7 @@ import grails.transaction.Transactional
 @Transactional
 class MeasureService {
 
-    def serviceMethod() {
-
+    def runMeasure(Measure measure) {
+		measure.query
     }
 }

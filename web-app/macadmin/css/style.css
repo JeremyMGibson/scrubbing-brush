@@ -9,7 +9,7 @@ body{
 	color: #666;
 	border-top: 3px solid #eee;
 	background:#343434 url("../img/back.png") repeat;  
-	padding-top: 37px;
+	padding-top: 48px;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -860,15 +860,15 @@ header .header-data .hdata em{
 	border:1px solid #ddd !important;
 }
 
-table.dataTable thead .sorting {
+table.dataTable thead .sortable {
   background: url("../img/data-tables/sort_both.png") no-repeat center right;
 }
 
-table.dataTable thead .sorting_asc {
+table.dataTable thead .sorted.asc {
   background: url("../img/data-tables/sort_asc.png") no-repeat center right;
 }
 
-table.dataTable thead .sorting_desc {
+table.dataTable thead .sorted.desc {
   background: url("../img/data-tables/sort_desc.png") no-repeat center right;
 }
 
@@ -1038,6 +1038,7 @@ table.dataTable thead .sorting_desc_disabled {
 }
 
 .widget .table.table-bordered td{
+	border: none;
 	border-right:1px solid #ddd;
 }
 

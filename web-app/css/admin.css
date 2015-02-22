@@ -1,0 +1,14 @@
+.icon-measure:before {
+	content: "\f080";
+}
+.icon-user:before {
+	content: "\f007";
+}
+#login {
+	padding: 60px 0 !important;
+	margin-top: 0 !important;
+}
+
+#login .inner {
+	margin: 0 auto !important;
+}
