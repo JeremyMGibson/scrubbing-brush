@@ -10,6 +10,7 @@ class MeasureService {
 
 	def runMeasure(Measure measure) {
 		def measureRun = new MeasureRun()
+		measureRun.runtime = new DateTime()
 		try{
 			//Load connection
 			measure.connection
@@ -25,7 +26,7 @@ class MeasureService {
 			def errorRefs = []
 
 			results.each{result ->
-				def measureResult = MeasureResult.findByMeasureAndReference(measure, result[0])
+				def measureResult = MeasureResult.findByMeasureIdAndReference(measure.id, result[0])
 				def errorData = [:]
 				(1..result.size()).each{i ->
 					errorData[i-1] = result[i]
@@ -45,13 +46,14 @@ class MeasureService {
 				measureResult.save()
 				errorRefs << measureResult.reference
 			}
-			def	fixedErrors = MeasureResult.findByMeasureAndRNoteferenceAndFixed(measure, errorRefs, null)
+			def	fixedErrors = MeasureResult.findByMeasureIdAndReferenceAndFixed(measure.id, errorRefs, null)
 			fixedErrors.each{error ->
 				error.fixed = new DateTime()
 				error.saved()
 			}
 	    	
 		} catch(Exception e) {
+			
 			
 		}
 	}
