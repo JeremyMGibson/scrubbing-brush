@@ -1,15 +1,17 @@
 package chia
 
+import org.joda.time.DateTime
+
 
 class MeasureRun {
 	int runNumber
-	Date runtime
+	DateTime runtime
 	int oldErrors
 	int newErrors
 	int fixedErrors
 	int reappearingErrors
-		
-	static belongsTo = [measure:Measure]
+	Boolean success
+	Measure measure
 
     static constraints = {
 		measure blank:false

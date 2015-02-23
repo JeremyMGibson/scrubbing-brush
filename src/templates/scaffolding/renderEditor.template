@@ -33,7 +33,7 @@
 
     private renderEnumEditor(domainClass, property) {
 		def sb = new StringBuilder("")
-        sb << '<g:select name="' << property.name << '"'
+        sb << '<g:select class="form-control" name="' << property.name << '"'
  		sb << ' from="${' << "${property.type.name}?.values()" << '}"'
  		sb << ' keys="${' << property.type.name << '.values()*.name()}"'
 		if (isRequired()) sb << ' required=""'

@@ -2,15 +2,22 @@ package chia
 
 class Measure {
 	enum MeasureType { ERROR, WARNING }
+	enum Connection { RESEARCH_MASTER }
 	
 	String name
 	String description
-	String connection
+	Connection connection
 	String query
 	String correctionScript
 	MeasureType type
 	
-	static hasMany = [run:MeasureRun, errors:MeasureResult]
+	static hasMany = [errors:MeasureError, runs:MeasureRun]
+	
+	static mapping = {
+		query type: 'text'
+		correctionScript type: 'text'
+		description type: 'text'
+	 }
 	
     static constraints = {
 		name blank: false
