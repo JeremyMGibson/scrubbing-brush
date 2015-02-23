@@ -25,15 +25,15 @@ class MeasureService {
 			def errorRefs = []
 
 			results.each{result ->
-				def measureResult = MeasureResult.findByMeasureAndReference(measure, result[0])
+				def measureResult = MeasureError.findByMeasureAndReference(measure, result[0])
 				def errorData = [:]
 				(1..result.size()).each{i ->
 					errorData[i-1] = result[i]
 				}
 				if (measureResult == null) {
-					measureResult = new MeasureResult(measure, result[0], errorData)
+					measureResult = new MeasureError(measure, result[0], errorData)
 					newErrorCount++
-				} else if (measureResult.ignore) {
+				} else if (measureResult.disregard) {
 					//Skip this one
 				} else if (measureResult.fixed == null) {
 					oldErrorCount++ 
@@ -45,10 +45,10 @@ class MeasureService {
 				measureResult.save()
 				errorRefs << measureResult.reference
 			}
-			def	fixedErrors = MeasureResult.findByMeasureAndRNoteferenceAndFixed(measure, errorRefs, null)
+			def	fixedErrors = MeasureError.ffindByMeasureAndRNoteferenceAndFixed(measure, errorRefs, null)
 			fixedErrors.each{error ->
 				error.fixed = new DateTime()
-				error.saved()
+				error.save()
 			}
 	    	
 		} catch(Exception e) {
