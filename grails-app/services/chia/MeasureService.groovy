@@ -10,7 +10,10 @@ class MeasureService {
 
 	def runMeasure(Measure measure) {
 		def measureRun = new MeasureRun()
+
 		measureRun.runtime = new DateTime()
+		measureRun.measure = measure
+		measureRun.runNumber = measure.runs.size()
 		try{
 			//Load connection
 			measure.connection
