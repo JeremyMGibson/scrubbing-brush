@@ -11,12 +11,28 @@ class Measure {
 	String correctionScript
 	MeasureType type
 	
-	static hasMany = [errors:MeasureError, runs:MeasureRun]
+	def getRunData() {
+		def oldErrorData = []
+		def newErrorData = []
+		def recurringErrorData = []
+		def fixedErrorData = []
+		def allErrorData = [newErrorData, recurringErrorData, oldErrorData, fixedErrorData]
+		runs.each{run ->
+			oldErrorData << [run.runNumber, run.oldErrors]
+			newErrorData << [run.runNumber, run.newErrors]
+			recurringErrorData << [run.runNumber, run.reappearingErrors]
+			fixedErrorData << [run.runNumber, run.fixedErrors]
+		}
+		return allErrorData
+	}
+	
+	static hasMany = [results:MeasureResult, runs:MeasureRun]
 	
 	static mapping = {
 		query type: 'text'
 		correctionScript type: 'text'
 		description type: 'text'
+		runs sort:'runNumber'
 	 }
 	
     static constraints = {
@@ -25,5 +41,6 @@ class Measure {
 		connection blank:false 
 		query blank:false 
 		type unique:false 
+		correctionScript nullable:true
     }
 }

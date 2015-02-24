@@ -12,3 +12,6 @@
 #login .inner {
 	margin: 0 auto !important;
 }
+.widget-head .buttons a {
+	margin-left: 15px;
+}

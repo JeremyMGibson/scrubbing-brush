@@ -139,3 +139,5 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/macadmin/img/**':            ['permitAll']
 ]
 
+
+

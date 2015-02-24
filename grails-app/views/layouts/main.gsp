@@ -46,6 +46,39 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="img/favicon/favicon.png">
   <g:layoutHead/>
+  
+  <!-- JS -->
+	<script src="${request.contextPath}/macadmin/js/jquery.js"></script> <!-- jQuery -->
+	<script src="${request.contextPath}/macadmin/js/bootstrap.min.js"></script> <!-- Bootstrap -->
+	<script src="${request.contextPath}/macadmin/js/jquery-ui.min.js"></script> <!-- jQuery UI -->
+	<script src="${request.contextPath}/macadmin/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+	<script src="${request.contextPath}/macadmin/js/jquery.rateit.min.js"></script> <!-- RateIt - Star rating -->
+	<script src="${request.contextPath}/macadmin/js/jquery.prettyPhoto.js"></script> <!-- prettyPhoto -->
+	<script src="${request.contextPath}/macadmin/js/jquery.slimscroll.min.js"></script> <!-- jQuery Slim Scroll -->
+	<script src="${request.contextPath}/macadmin/js/jquery.dataTables.min.js"></script> <!-- Data tables -->
+	
+	<!-- jQuery Flot -->
+	<script src="${request.contextPath}/macadmin/js/excanvas.min.js"></script>
+	<script src="${request.contextPath}/macadmin/js/jquery.flot.js"></script>
+	<script src="${request.contextPath}/macadmin/js/jquery.flot.resize.js"></script>
+	<script src="${request.contextPath}/macadmin/js/jquery.flot.pie.js"></script>
+	<script src="${request.contextPath}/macadmin/js/jquery.flot.stack.js"></script>
+	
+	<!-- jQuery Notification - Noty -->
+	<script src="${request.contextPath}/macadmin/js/jquery.noty.js"></script> <!-- jQuery Notify -->
+	<script src="${request.contextPath}/macadmin/js/themes/default.js"></script> <!-- jQuery Notify -->
+	<script src="${request.contextPath}/macadmin/js/layouts/bottom.js"></script> <!-- jQuery Notify -->
+	<script src="${request.contextPath}/macadmin/js/layouts/topRight.js"></script> <!-- jQuery Notify -->
+	<script src="${request.contextPath}/macadmin/js/layouts/top.js"></script> <!-- jQuery Notify -->
+	<!-- jQuery Notification ends -->
+	
+	<script src="${request.contextPath}/macadmin/js/sparklines.js"></script> <!-- Sparklines -->
+	<script src="${request.contextPath}/macadmin/js/jquery.cleditor.min.js"></script> <!-- CLEditor -->
+	<script src="${request.contextPath}/macadmin/js/bootstrap-datetimepicker.min.js"></script> <!-- Date picker -->
+	<script src="${request.contextPath}/macadmin/js/jquery.onoff.min.js"></script> <!-- Bootstrap Toggle -->
+	<script src="${request.contextPath}/macadmin/js/filter.js"></script> <!-- Filter for support page -->
+	<script src="${request.contextPath}/macadmin/js/custom.js"></script> <!-- Custom codes -->
+	<script src="${request.contextPath}/macadmin/js/charts.js"></script> <!-- Charts & Graphs -->
 </head>
 
 <body>
@@ -133,39 +166,6 @@
 
 <!-- Scroll to top -->
 <span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span> 
-
-<!-- JS -->
-<script src="${request.contextPath}/macadmin/js/jquery.js"></script> <!-- jQuery -->
-<script src="${request.contextPath}/macadmin/js/bootstrap.min.js"></script> <!-- Bootstrap -->
-<script src="${request.contextPath}/macadmin/js/jquery-ui.min.js"></script> <!-- jQuery UI -->
-<script src="${request.contextPath}/macadmin/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
-<script src="${request.contextPath}/macadmin/js/jquery.rateit.min.js"></script> <!-- RateIt - Star rating -->
-<script src="${request.contextPath}/macadmin/js/jquery.prettyPhoto.js"></script> <!-- prettyPhoto -->
-<script src="${request.contextPath}/macadmin/js/jquery.slimscroll.min.js"></script> <!-- jQuery Slim Scroll -->
-<script src="${request.contextPath}/macadmin/js/jquery.dataTables.min.js"></script> <!-- Data tables -->
-
-<!-- jQuery Flot -->
-<script src="${request.contextPath}/macadmin/js/excanvas.min.js"></script>
-<script src="${request.contextPath}/macadmin/js/jquery.flot.js"></script>
-<script src="${request.contextPath}/macadmin/js/jquery.flot.resize.js"></script>
-<script src="${request.contextPath}/macadmin/js/jquery.flot.pie.js"></script>
-<script src="${request.contextPath}/macadmin/js/jquery.flot.stack.js"></script>
-
-<!-- jQuery Notification - Noty -->
-<script src="${request.contextPath}/macadmin/js/jquery.noty.js"></script> <!-- jQuery Notify -->
-<script src="${request.contextPath}/macadmin/js/themes/default.js"></script> <!-- jQuery Notify -->
-<script src="${request.contextPath}/macadmin/js/layouts/bottom.js"></script> <!-- jQuery Notify -->
-<script src="${request.contextPath}/macadmin/js/layouts/topRight.js"></script> <!-- jQuery Notify -->
-<script src="${request.contextPath}/macadmin/js/layouts/top.js"></script> <!-- jQuery Notify -->
-<!-- jQuery Notification ends -->
-
-<script src="${request.contextPath}/macadmin/js/sparklines.js"></script> <!-- Sparklines -->
-<script src="${request.contextPath}/macadmin/js/jquery.cleditor.min.js"></script> <!-- CLEditor -->
-<script src="${request.contextPath}/macadmin/js/bootstrap-datetimepicker.min.js"></script> <!-- Date picker -->
-<script src="${request.contextPath}/macadmin/js/jquery.onoff.min.js"></script> <!-- Bootstrap Toggle -->
-<script src="${request.contextPath}/macadmin/js/filter.js"></script> <!-- Filter for support page -->
-<script src="${request.contextPath}/macadmin/js/custom.js"></script> <!-- Custom codes -->
-<script src="${request.contextPath}/macadmin/js/charts.js"></script> <!-- Charts & Graphs -->
 
 </body>
 </html>
