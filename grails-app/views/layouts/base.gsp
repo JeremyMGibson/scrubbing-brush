@@ -10,10 +10,25 @@
   <meta name="keywords" content="">
   <meta name="author" content="">
 
-  <r:require module="core" />
-  <r:layoutResources />
+ <!-- Stylesheets -->
+  <link href="${request.contextPath}/macadmin/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font awesome icon -->
+  <link rel="stylesheet" href="${request.contextPath}/macadmin/css/font-awesome.min.css"> 
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="${request.contextPath}/macadmin/css/jquery-ui.css"> 
+  <!-- Main stylesheet -->
+  <link href="${request.contextPath}/macadmin/css/style.css" rel="stylesheet">
+  <!-- Widgets stylesheet -->
+  <link href="${request.contextPath}/macadmin/css/widgets.css" rel="stylesheet">
+  
+  <link href="${request.contextPath}/css/admin.css" rel="stylesheet">
   <!-- Favicon -->
   <link rel="shortcut icon" href="img/favicon/favicon.png">
+  
+  <script src="${request.contextPath}/macadmin/js/jquery.js"></script> <!-- jQuery -->
+  <script src="${request.contextPath}/macadmin/js/bootstrap.min.js"></script> <!-- Bootstrap -->
+	<script src="${request.contextPath}/macadmin/js/jquery-ui.min.js"></script> <!-- jQuery UI -->
+  
 </head>
 
 <body>
