@@ -255,6 +255,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.grails.ide.eclipse.core.CLASSPATH_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/pivotal-tc-server-developer-3.0.2.SR2/lib/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/pivotal-tc-server-developer-3.0.2.SR2/lib/xdb6.jar"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>

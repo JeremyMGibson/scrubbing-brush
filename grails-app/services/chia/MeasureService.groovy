@@ -1,12 +1,11 @@
 package chia
 
 import grails.transaction.Transactional
-
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.Statement
+import groovy.sql.Sql
 
 import org.joda.time.DateTime
+
+import com.mysql.jdbc.ResultSetMetaData
 
 @Transactional
 class MeasureService {
@@ -14,11 +13,11 @@ class MeasureService {
 	MeasureRun runMeasure(Measure measure) {
 		def run = runQuery(measure)
 		if (!measure.correctionScript?.trim() && run.success) {
-			runUpdate(measure, run)
-			def results = executeSql(measure.connection, measure.query)
-			run.fixedErrors = run.newErrors + run.oldErrors + run.reappearingErrors - results.size()
-			run.save()
-		}
+			//runUpdate(measure, run)
+			//def results = createSql(measure.connection, measure.query)
+			//run.fixedErrors = run.newErrors + run.oldErrors + run.reappearingErrors - results.size()
+			//run.save()
+		} 
 		return run 
 	}
 
@@ -37,8 +36,9 @@ class MeasureService {
 		measureRun.runtime = new DateTime()
 		measureRun.measure = measure
 		measureRun.runNumber = measure.runs == null ? 1 : measure.runs.size() + 1
+		
 		try{
-			def results = executeSql(measure.connection, measure.query)
+			Sql sql = createSql()
 	
 			def newErrorCount = 0
 			def oldErrorCount = 0
@@ -46,23 +46,21 @@ class MeasureService {
 
 			def errors = MeasureResult.findAllByMeasureAndFixed(measure, null)
 
-			results.each{result ->
-				def measureResult = errors[result[0]]
-				def errorData = [:]
-				(1..result.size()).each{i ->
-					errorData[i-1] = result[i]
-				}
+			sql.eachRow(measure.query){result ->
+				def measureResult = errors.findResult {err -> err.reference = result.errorId}
+								
 				if (measureResult == null) {
 					measureResult = new MeasureResult()
-					measureResult.reference = result[0]
-					measureResult.errorData = errorData
+					measureResult.reference = result.errorId
+					measureResult.errorData = result
 					measureResult.found = measureRun
 					measureResult.measure = measure
+					measureResult.save()
 					
 					newErrorCount++
 				} else {
-					measureResult.errorData = errorData
-					errors.remove(result[0])
+					measureResult.errorData = result
+					errors.removeIf {err -> err.reference = result.errorId}
 
 				 	if (measureResult.disregard) {
 						//Skip this one
@@ -73,8 +71,9 @@ class MeasureService {
 						measureResult.found = new DateTime()
 						rebrokenErrorCount++
 					}
+					measureResult.save() 
 				}
-				measureResult.save()
+				
 			}
 			errors.each{error ->
 				error.fixed = measureRun
@@ -84,6 +83,7 @@ class MeasureService {
 			measureRun.newErrors = newErrorCount
 			measureRun.reappearingErrors = rebrokenErrorCount
 			measureRun.fixedErrors = errors.size()
+			measureRun.success = true
 		} catch(Exception e) {
 			e.printStackTrace();
 			measureRun.success = false
@@ -94,11 +94,11 @@ class MeasureService {
 		return measureRun
 	}
 
-	def executeSql(Measure.Connection connection, String query) {
-		Class.forName ("oracle.jdbc.OracleDriver");
-		//Load connection
-      	def conn = DriverManager.getConnection("jdbc:oracle:oci:@RM-PRD", "GIBSONJ2_RO", "TEMP1234")
-	 	Statement stmt = conn.createStatement()
-		return stmt.executeQuery(query)
+	def createSql() {
+		return Sql.newInstance(
+			"jdbc:oracle:thin:@cman1.qut.edu.au:1630/RMPRD.QUT.EDU.AU",
+			"GIBSONJ2_RO",
+			"TEST1234",
+			"oracle.jdbc.OracleDriver")
 	}
 }

@@ -17,7 +17,7 @@ class MeasureRun {
 	int getTotalErrors() {
 		return oldErrors + newErrors + reappearingErrors
 	}	
-
+	
 	static mapping = {
 		runtime type: PersistentDateTime
 	}

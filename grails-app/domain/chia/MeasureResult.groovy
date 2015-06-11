@@ -9,10 +9,10 @@ class MeasureResult {
 	MeasureRun fixed
 	Boolean disregard
 	Measure measure
-		
-    static constraints = {
-		measure nullable:false
-		found nullable:false 
-		fixed nullable:true 
+
+	    static constraints = {
+		measure blank:false
+		found blank:false 
+		fixed blank:true 
     }
 }

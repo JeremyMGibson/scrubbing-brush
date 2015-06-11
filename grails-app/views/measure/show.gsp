@@ -95,7 +95,7 @@
 								    $.plot($("#bar-chart"), ${measureInstance.getRunData()}, {
 							            series: {
 							                stack: true,
-							                bars: { show: true, barWidth: 0.8 }
+							                bars: { show: true, barWidth: 0.8, align: "center" }
 							            },
 							            grid: {
 							                borderWidth: 0, hoverable: true, color: "#777"
@@ -106,7 +106,14 @@
 							                  lineWidth: 0,
 							                  fill: true,
 							                  fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.8 } ] }
-							            }
+							            },
+							            xaxis: {
+								            tickSize: 1,
+								            
+								            tickFormatter: function formatter(val, axis) {
+									            return Math.round(val);
+									        }
+								        }
 							        });
 								});
 							</script>

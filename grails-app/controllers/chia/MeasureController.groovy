@@ -124,8 +124,12 @@ class MeasureController {
 		
 		def run = measureService.runMeasure(measureInstance);
 
-		flash.success = run.success
+		flash.success = run.success 
 		if (run.success) {
+			MeasureResult res = new MeasureResult()
+			res.found = run
+			res.measure = run.measure
+			res.save()
 			flash.message = "Measure successfully run"
 		} else {
 			flash.message = "Measure failed to run"

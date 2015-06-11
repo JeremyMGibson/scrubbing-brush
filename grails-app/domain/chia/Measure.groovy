@@ -33,6 +33,7 @@ class Measure {
 		correctionScript type: 'text'
 		description type: 'text'
 		runs sort:'runNumber'
+		results sort:'reference'
 	 }
 	
     static constraints = {
