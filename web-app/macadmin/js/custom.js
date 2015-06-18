@@ -78,33 +78,34 @@ $(document).ready(function(){
       }
   });
 
+  /* Widget close */
+
+  $('.wclose').click(function(e){
+    e.preventDefault();
+    var $wbox = $(this).parent().parent().parent();
+    $wbox.hide(100);
+  });
+
+  /* Widget minimize */
+
+  $('.wminimize').click(function(e){
+  	e.preventDefault();
+  	var $wcontent = $(this).parent().parent().next('.widget-content');
+  	if($wcontent.is(':visible')) 
+  	{
+  	  $(this).children('i').removeClass('fa fa-chevron-up');
+  	  $(this).children('i').addClass('fa fa-chevron-down');
+  	}
+  	else 
+  	{
+  	  $(this).children('i').removeClass('fa fa-chevron-down');
+  	  $(this).children('i').addClass('fa fa-chevron-up');
+  	}            
+  	$wcontent.toggle(500);
+  }); 
 });
 
-/* Widget close */
 
-$('.wclose').click(function(e){
-  e.preventDefault();
-  var $wbox = $(this).parent().parent().parent();
-  $wbox.hide(100);
-});
-
-/* Widget minimize */
-
-$('.wminimize').click(function(e){
-	e.preventDefault();
-	var $wcontent = $(this).parent().parent().next('.widget-content');
-	if($wcontent.is(':visible')) 
-	{
-	  $(this).children('i').removeClass('fa fa-chevron-up');
-	  $(this).children('i').addClass('fa fa-chevron-down');
-	}
-	else 
-	{
-	  $(this).children('i').removeClass('fa fa-chevron-down');
-	  $(this).children('i').addClass('fa fa-chevron-up');
-	}            
-	$wcontent.toggle(500);
-}); 
 
 /* Calendar */
 
@@ -332,34 +333,33 @@ $(function() {
   
 $(document).ready(function() {
   $('.toggleBtn').onoff();
-});
+  
+  /* CL Editor */
 
+  $(".cleditor").cleditor({
+      width: "auto",
+      height: "auto"
+  });
+  
+  /* Modal fix */
 
-/* CL Editor */
+  $('.modal').appendTo($('body'));
 
-$(".cleditor").cleditor({
-    width: "auto",
-    height: "auto"
-});
+  /* Pretty Photo for Gallery*/
 
-/* Modal fix */
+  jQuery("a[class^='prettyPhoto']").prettyPhoto({
+  overlay_gallery: false, social_tools: false
+  });
 
-$('.modal').appendTo($('body'));
+  /* Slim Scroll */
 
-/* Pretty Photo for Gallery*/
+  /* Slim scroll for chat widget */
 
-jQuery("a[class^='prettyPhoto']").prettyPhoto({
-overlay_gallery: false, social_tools: false
-});
-
-/* Slim Scroll */
-
-/* Slim scroll for chat widget */
-
-$('.scroll-chat').slimscroll({
-  height: '350px',
-  color: 'rgba(0,0,0,0.3)',
-  size: '5px'
+  $('.scroll-chat').slimscroll({
+    height: '350px',
+    color: 'rgba(0,0,0,0.3)',
+    size: '5px'
+  });
 });
 
 /* Data tables */

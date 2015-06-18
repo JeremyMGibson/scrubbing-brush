@@ -15,3 +15,7 @@
 .widget-head .buttons a {
 	margin-left: 15px;
 }
+
+.table-responsive tr.failed {
+	background-color: #FFD1D0 !important;
+}

@@ -50,7 +50,7 @@
 							<div class="alert alert-${flash.success ? 'success' : 'danger' } alert-dismissable fade in" role="status">${flash.message}</div>
 							</g:if>
 							<g:if test="${measureInstance?.description}">
-										<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${measureInstance}" field="description"/></span>
+										<div class="property-value" aria-labelledby="description-label">${raw(measureInstance.description)}</div>
 							</g:if>
 						</div>
 							
@@ -58,7 +58,7 @@
 						<g:if test="${measureInstance?.runs}">
 							<hr />
 							<div class="padd">
-								<div id="bar-chart" style="height:200px"></div>
+								<div id="bar-chart" style="height:500px"></div>
 							</div>
 							<div class="table-responsive">
 								<table class="table dataTable table-striped table-bordered table-hover" style="border-top: 1px solid #ccc">
@@ -66,13 +66,13 @@
 										<tr>
 											<g:sortableColumn property="runNumber" title="${message(code: 'measureRun.runNumber.label', default: 'Run Number')}" />
 											<g:sortableColumn property="runtime" title="${message(code: 'measureRun.runtime.label', default: 'Runtime')}" />
-											<g:sortableColumn property="totalErrors" title="Errors Found" />
+											<g:sortableColumn property="totalErrors" title="Errors Identified" />
 											<g:sortableColumn property="fixedErrors" title="Errors Fixed" />
 										</tr>
 									</thead>
 									<tbody>
-									<g:each in="${measureInstance.runs}" status="i" var="result">
-										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+									<g:each in="${measureInstance.runs}" status="i" var="result" >
+										<tr class="${(i % 2) == 0 ? 'even' : 'odd'} ${result.success ? 'completed' : 'failed'}">
 											<td><g:link action="show" id="${result.id}">${fieldValue(bean: result, field: "runNumber")}</g:link></td>
 											<td><joda:format pattern="dd/MM/yyyy h:mma" value="${result.runtime}"/></td>
 											<td>${result.getTotalErrors()}</td>
@@ -92,29 +92,49 @@
 							
 							<script type="text/javascript">
 								$(document).ready(function() {
-								    $.plot($("#bar-chart"), ${measureInstance.getRunData()}, {
-							            series: {
-							                stack: true,
-							                bars: { show: true, barWidth: 0.8, align: "center" }
-							            },
-							            grid: {
+								    $.plot($("#bar-chart"), [{
+								    	data: ${measureInstance.getNewErrorData()},
+								    	label: "New Errors",
+							        }, 
+							        {
+							        	data: ${measureInstance.getOldErrorData()},
+								    	label: "Recurring Errors",
+							        }, 
+							        {
+							        	data: ${measureInstance.getRebrokenErrorData()},
+								    	label: "Rebroken Errors",
+							        }, 
+							        {
+								    	data: ${measureInstance.getFixedData()},
+								    	label: "Resolved Errors",
+								    	stack: false,
+							            bars: { show: true, barWidth: 0.7, align: "center", fillColor: { colors: [ { opacity: 1 }, { opacity: 0.9 } ] } }
+							             
+							        }],
+							        {
+							        	grid: {
 							                borderWidth: 0, hoverable: true, color: "#777"
 							            },
-							            colors: ["#ff6c24", "#ff2424", "#5eb2d9", "#4ac344"],
-							            bars: {
-							                  show: true,
-							                  lineWidth: 0,
-							                  fill: true,
-							                  fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.8 } ] }
-							            },
+							            
 							            xaxis: {
 								            tickSize: 1,
 								            
 								            tickFormatter: function formatter(val, axis) {
 									            return Math.round(val);
 									        }
-								        }
-							        });
+								        },
+								        series: {
+							                stack: true,
+							                bars: { show: true, barWidth: 0.9, align: "center" }
+							            },
+							            colors: ["#ff6c24", "#FFcc33", "#ff2424", "#4ac344"],
+							            bars: {
+							                  show: true,
+							                  lineWidth: 0,
+							                  fill: true,
+							                  fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.8 } ] }
+							            }
+								    });							        
 								});
 							</script>
 						</g:if>

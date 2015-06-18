@@ -20,6 +20,7 @@ class MeasureRun {
 	
 	static mapping = {
 		runtime type: PersistentDateTime
+		sort runNumber: "desc"
 	}
 	
     static constraints = {

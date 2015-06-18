@@ -36,6 +36,8 @@ class MeasureService {
 		measureRun.runtime = new DateTime()
 		measureRun.measure = measure
 		measureRun.runNumber = measure.runs == null ? 1 : measure.runs.size() + 1
+		measureRun.success = false;
+		measureRun.save()
 		
 		try{
 			Sql sql = createSql()
@@ -47,31 +49,35 @@ class MeasureService {
 			def errors = MeasureResult.findAllByMeasureAndFixed(measure, null)
 
 			sql.eachRow(measure.query){result ->
-				def measureResult = errors.findResult {err -> err.reference = result.errorId}
+				MeasureResult measureError = errors.findResult {it.reference == result.errorId ? it : null}
 								
-				if (measureResult == null) {
-					measureResult = new MeasureResult()
-					measureResult.reference = result.errorId
-					measureResult.errorData = result
-					measureResult.found = measureRun
-					measureResult.measure = measure
-					measureResult.save()
+				if (measureError == null) {
+					//Double check if it has already been fixed
+					measureError = MeasureResult.findByReference(result.errorId)
 					
-					newErrorCount++
-				} else {
-					measureResult.errorData = result
-					errors.removeIf {err -> err.reference = result.errorId}
-
-				 	if (measureResult.disregard) {
-						//Skip this one
-					} else if (measureResult.fixed == null) {
-						oldErrorCount++ 
+					if (measureError == null) {
+						measureError = new MeasureResult()
+						measureError.reference = result.errorId
+						measureError.errorData = result
+						measureError.found = measureRun
+						measureError.measure = measure
+						measureError.disregard = false
+						measureError.save()
+						
+						newErrorCount++
 					} else {												
-						measureResult.fixed = null
-						measureResult.found = new DateTime()
+						measureError.fixed = null
+						measureError.found = measureRun
 						rebrokenErrorCount++
 					}
-					measureResult.save() 
+				} else {
+					measureError.errorData = result
+					errors.removeAll{it.reference == result.errorId}
+
+				 	if (!measureError.disregard) {
+						oldErrorCount++ 
+					} 
+					measureError.save() 
 				}
 				
 			}
@@ -84,11 +90,9 @@ class MeasureService {
 			measureRun.reappearingErrors = rebrokenErrorCount
 			measureRun.fixedErrors = errors.size()
 			measureRun.success = true
+			measureRun.save()
 		} catch(Exception e) {
 			e.printStackTrace();
-			measureRun.success = false
-		} finally {
-			measureRun.save()
 		}
 
 		return measureRun

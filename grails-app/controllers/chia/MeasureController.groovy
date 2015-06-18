@@ -40,7 +40,7 @@ class MeasureController {
             respond measureInstance.errors, view:'create'
             return
         }
-
+		
         measureInstance.save flush:true
 
         request.withFormat {
@@ -120,20 +120,18 @@ class MeasureController {
 		if (measureInstance == null) {
 			redirect action:"index", method: "GET"
 			return
-		}
+		} 
 		
 		def run = measureService.runMeasure(measureInstance);
-
+				
 		flash.success = run.success 
-		if (run.success) {
-			MeasureResult res = new MeasureResult()
-			res.found = run
-			res.measure = run.measure
-			res.save()
+		if (run.success) {			
 			flash.message = "Measure successfully run"
 		} else {
 			flash.message = "Measure failed to run"
 		}
 		redirect action:"show", method:"GET", id:measureInstance.id
 	}
+	
+	
 }

@@ -130,6 +130,7 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'chia.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'chia.UserRole'
 grails.plugin.springsecurity.authority.className = 'chia.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':							  ['permitAll'],
 	'/assets/**':                     ['permitAll'],
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],

@@ -3,6 +3,8 @@ package chia
 class Measure {
 	enum MeasureType { ERROR, WARNING }
 	enum Connection { RESEARCH_MASTER }
+	enum Priority { CRITICAL, HIGH, MEDIUM, LOW }
+	enum Concern { HIGH, MEDIUM, LOW }
 	
 	String name
 	String description
@@ -10,31 +12,61 @@ class Measure {
 	String query
 	String correctionScript
 	MeasureType type
+	Priority priority
+	Long threshold
+	Long numErrors
+	Concern concern
 	
-	def getRunData() {
-		def oldErrorData = []
-		def newErrorData = []
-		def recurringErrorData = []
-		def fixedErrorData = []
-		def allErrorData = [newErrorData, recurringErrorData, oldErrorData, fixedErrorData]
-		runs.each{run ->
-			oldErrorData << [run.runNumber, run.oldErrors]
-			newErrorData << [run.runNumber, run.newErrors]
-			recurringErrorData << [run.runNumber, run.reappearingErrors]
-			fixedErrorData << [run.runNumber, run.fixedErrors]
-		}
-		return allErrorData
+	def getConcern() {
+		switch (numErrors/threshold) {
+			case 1: return Concern.HIGH
+			case 0.75: return Concern.MEDIUM
+			default: return Concern.LOW
+		}			
 	}
 	
-	static hasMany = [results:MeasureResult, runs:MeasureRun]
+	def getOldErrorData() {
+		def oldErrorData = []
+		runs.each{run ->
+			oldErrorData << [run.runNumber, run.oldErrors]
+		}
+		return oldErrorData
+	}
+	
+	def getNewErrorData() {
+		def newErrorData = []
+		runs.each{run ->
+			newErrorData << [run.runNumber, run.newErrors]
+		}
+		return newErrorData
+	}
+	
+	def getRebrokenErrorData() {
+		def recurringErrorData = []
+		runs.each{run ->
+			recurringErrorData << [run.runNumber, run.reappearingErrors]
+		}
+		return recurringErrorData
+	}
+	
+	def getFixedData() {
+		def fixedErrorData = []
+		runs.each{run -> 
+			fixedErrorData << [run.runNumber, run.fixedErrors]
+		}
+		return fixedErrorData
+	}
+	
+	static hasMany = [results:MeasureResult, runs:MeasureRun, tags:Tag]
 	
 	static mapping = {
 		query type: 'text'
 		correctionScript type: 'text'
 		description type: 'text'
-		runs sort:'runNumber'
+		runs sort:'runNumber', order: 'desc'
 		results sort:'reference'
-	 }
+		numErrors formula: '(select count(*) from measure_result mr where mr.fixed_id is null and mr.measure_id = id)'
+	}
 	
     static constraints = {
 		name blank: false

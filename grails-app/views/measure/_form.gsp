@@ -11,13 +11,31 @@
 
 </div>
 
+<div class="fieldcontain form-group ${hasErrors(bean: measureInstance, field: 'priority', 'error')} required">
+	<label for="name" class="control-label">
+		<g:message code="measure.priority.label" default="Priority" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="priority" from="${Measure.Priority?.values()}" value="${measureInstance?.priority}"/>
+</div>
+
+<div class="fieldcontain form-group ${hasErrors(bean: measureInstance, field: 'tags', 'error')} required">
+	<label for="name" class="control-label">
+		<g:message code="measure.tags.label" default="Tags" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:each in="${tags}" var="tag">
+		<g:select name="tag" from="${Tag.values()}" value="${measureInstance?.tags}"/>
+	</g:each>
+</div>
+
+
 <div class="fieldcontain form-group ${hasErrors(bean: measureInstance, field: 'description', 'error')} required">
 	<label for="description" class="control-label">
 		<g:message code="measure.description.label" default="Description" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textArea name="description" required="" value="${measureInstance?.description}" class="form-control"/>
-
+	<g:textArea name="description" required="" value="${measureInstance?.description}" class="cleditor"/>
 </div>
 
 <div class="fieldcontain form-group ${hasErrors(bean: measureInstance, field: 'connection', 'error')} required">
