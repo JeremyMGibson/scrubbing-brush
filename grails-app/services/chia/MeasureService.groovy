@@ -4,8 +4,7 @@ import grails.transaction.Transactional
 import groovy.sql.Sql
 
 import org.joda.time.DateTime
-
-import com.mysql.jdbc.ResultSetMetaData
+import org.json.JSONObject
 
 @Transactional
 class MeasureService {
@@ -19,6 +18,13 @@ class MeasureService {
 			//run.save()
 		} 
 		return run 
+	}
+	
+	def runAllMeasures() {
+		Measure.all.each { measure ->
+			runMeasure(measure)
+			println measure
+		}
 	}
 
 	def runUpdate(Measure measure, MeasureRun run) {
@@ -47,10 +53,13 @@ class MeasureService {
 			def rebrokenErrorCount = 0
 
 			def errors = MeasureResult.findAllByMeasureAndFixed(measure, null)
-
 			sql.eachRow(measure.query){result ->
-				MeasureResult measureError = errors.findResult {it.reference == result.errorId ? it : null}
-								
+				MeasureResult measureError = errors.findResult {it.reference.equals("" + result.errorId) ? it : null}
+				
+				def data = new JSONObject(result.toRowResult())
+				data.remove("errorID");
+				data = data.toString()
+				
 				if (measureError == null) {
 					//Double check if it has already been fixed
 					measureError = MeasureResult.findByReference(result.errorId)
@@ -58,28 +67,27 @@ class MeasureService {
 					if (measureError == null) {
 						measureError = new MeasureResult()
 						measureError.reference = result.errorId
-						measureError.errorData = result
+						measureError.errorData = data
 						measureError.found = measureRun
 						measureError.measure = measure
 						measureError.disregard = false
 						measureError.save()
 						
 						newErrorCount++
-					} else {												
+					} else {
 						measureError.fixed = null
 						measureError.found = measureRun
+						measureError.save()
 						rebrokenErrorCount++
 					}
 				} else {
-					measureError.errorData = result
-					errors.removeAll{it.reference == result.errorId}
-
-				 	if (!measureError.disregard) {
-						oldErrorCount++ 
-					} 
-					measureError.save() 
+					measureError.errorData = data
+					errors.removeAll{it.reference.equals("" + result.errorId)}
+					 if (!measureError.disregard) {
+						oldErrorCount++
+					}
+					measureError.save()
 				}
-				
 			}
 			errors.each{error ->
 				error.fixed = measureRun

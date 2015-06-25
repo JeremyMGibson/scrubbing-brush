@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="${request.contextPath}/macadmin/css/jquery.cleditor.css">  
   <!-- Data tables -->
   <link rel="stylesheet" href="${request.contextPath}/macadmin/css/jquery.dataTables.css"> 
+  <link rel="stylesheet" href="${request.contextPath}/macadmin/css/dataTables.bootstrap.css">
   <!-- Bootstrap toggle -->
   <link rel="stylesheet" href="${request.contextPath}/macadmin/css/jquery.onoff.css">
   <!-- Main stylesheet -->
@@ -36,7 +37,7 @@
   <!-- Widgets stylesheet -->
   <link href="${request.contextPath}/macadmin/css/widgets.css" rel="stylesheet">
   
-  <link href="${request.contextPath}/css/admin.css" rel="stylesheet">   
+  <link href="${request.contextPath}/assets/admin.css" rel="stylesheet">   
   
   <script src="${request.contextPath}/macadmin/js/respond.min.js"></script>
   <!--[if lt IE 9]>
@@ -56,6 +57,7 @@
 	<script src="${request.contextPath}/macadmin/js/jquery.prettyPhoto.js"></script> <!-- prettyPhoto -->
 	<script src="${request.contextPath}/macadmin/js/jquery.slimscroll.min.js"></script> <!-- jQuery Slim Scroll -->
 	<script src="${request.contextPath}/macadmin/js/jquery.dataTables.min.js"></script> <!-- Data tables -->
+	<script src="${request.contextPath}/macadmin/js/dataTables.bootstrap.js"></script> <!-- Data tables -->
 	
 	<!-- jQuery Flot -->
 	<script src="${request.contextPath}/macadmin/js/excanvas.min.js"></script>
@@ -79,6 +81,8 @@
 	<script src="${request.contextPath}/macadmin/js/filter.js"></script> <!-- Filter for support page -->
 	<script src="${request.contextPath}/macadmin/js/custom.js"></script> <!-- Custom codes -->
 	<script src="${request.contextPath}/macadmin/js/charts.js"></script> <!-- Charts & Graphs -->
+	<script src="${request.contextPath}/assets/zeroclipboard/ZeroClipboard.min.js"></script> <!-- Zero Clipboard -->
+	<script src="${request.contextPath}/assets/main.js"></script> <!-- Main -->
 </head>
 
 <body>
@@ -129,7 +133,7 @@
         <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
         <ul id="nav">
           <!-- Main menu with font awesome icon -->
-          <li><a href="${request.contextPath}"><i class="fa fa-home"></i> Dashboard</a></li>
+          <li><a href="${request.contextPath}/dashboard/"><i class="fa fa-home"></i> Dashboard</a></li>
           <sec:ifAnyGranted roles="ROLE_USER,ROLE_EDITOR,ROLE_ADMIN">
           	<li><a href="${request.contextPath}/measure/"><i class="fa fa-bar-chart"></i> Measures</a></li>
 		  </sec:ifAnyGranted>

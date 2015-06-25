@@ -10,7 +10,7 @@ import spock.lang.*
 @TestFor(MeasureController)
 @Mock(Measure)
 class MeasureControllerSpec extends Specification {
-
+ 
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...

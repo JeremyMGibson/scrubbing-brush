@@ -44,16 +44,20 @@
 											<g:sortableColumn property="name" title="${message(code: 'measure.name.label', default: 'Name')}" />
 											<g:sortableColumn property="priority" title="${message(code: 'measure.priority.label', default: 'Priority')}" />
 											<g:sortableColumn property="numErrors" title="${message(code: 'measure.numErrors.label', default: 'Errors Found')}" />
-											
+											<th>Tags</th>
 										</tr>
 									</thead>
 									<tbody>
 									<g:each in="${measureInstanceList}" status="i" var="measureInstance">
-										<tr class="${(i % 2) == 0 ? 'even' : 'odd'} ${measureInstance.concern}">
+										<tr class="${(i % 2) == 0 ? 'even' : 'odd'} ${measureInstance.getConcern()}">
 										
 											<td><g:link action="show" id="${measureInstance.id}">${fieldValue(bean: measureInstance, field: "name")}</g:link></td>
 											<td>${fieldValue(bean: measureInstance, field: "priority")}</td>
-											<td>${fieldValue(bean: measureInstance, field: "numErrors")}</td>																					
+											<td>${fieldValue(bean: measureInstance, field: "numErrors")}</td>
+											<td>
+												<g:each in="${measureInstance?.tags}" var="tag">
+													<span class="label label-default">${tag}</span>
+												</g:each></td>																					
 										</tr>
 									</g:each>
 									</tbody>

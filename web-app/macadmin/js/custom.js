@@ -365,7 +365,10 @@ $(document).ready(function() {
 /* Data tables */
 
 $(document).ready(function() {
-	$('#data-table-1').dataTable({
-	   "sPaginationType": "full_numbers"
+	$('*[data-table="yes"]').each(function() {
+		$(this).dataTable({
+			"sPaginationType": "full_numbers",
+			"order": $(this).data("table-sort")
+		});
 	});
 });

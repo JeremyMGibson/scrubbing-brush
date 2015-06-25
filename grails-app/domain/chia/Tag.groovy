@@ -13,4 +13,9 @@ class Tag {
     static constraints = {
 		name blank: false
     }
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

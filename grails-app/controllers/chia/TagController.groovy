@@ -6,5 +6,5 @@ import grails.plugin.springsecurity.annotation.Secured;
 
 @Secured(["ROLE_ADMIN"])
 class TagController {
-	static scaffold = true 
+	static scaffold = true  
 }

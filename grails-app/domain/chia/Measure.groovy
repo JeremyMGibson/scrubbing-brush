@@ -15,14 +15,22 @@ class Measure {
 	Priority priority
 	Long threshold
 	Long numErrors
-	Concern concern
+	
+	def getOutstandingErrors() {
+		return MeasureResult.findAllByMeasureAndFixed(this, null)	
+	}
 	
 	def getConcern() {
-		switch (numErrors/threshold) {
-			case 1: return Concern.HIGH
-			case 0.75: return Concern.MEDIUM
-			default: return Concern.LOW
-		}			
+		if (threshold != null && numErrors != null) {
+			if (numErrors/threshold > 1) {
+				return Concern.HIGH
+			} else if (numErrors/threshold > 0.75) {
+				return Concern.MEDIUM
+			} else {
+				return Concern.LOW
+			}			
+		}
+		return Concern.LOW			
 	}
 	
 	def getOldErrorData() {

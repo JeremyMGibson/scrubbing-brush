@@ -15,6 +15,6 @@ if (typeof jQuery !== 'undefined') {
 			$(this).fadeIn();
 		}).ajaxStop(function() {
 			$(this).fadeOut();
-		});
+		}); 
 	})(jQuery);
 }
