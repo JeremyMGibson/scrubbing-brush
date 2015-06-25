@@ -21,9 +21,9 @@
   <!-- Widgets stylesheet -->
   <link href="${request.contextPath}/macadmin/css/widgets.css" rel="stylesheet">
   
-  <link href="${request.contextPath}/css/admin.css" rel="stylesheet">
+  <link href="${request.contextPath}/assets/admin.css" rel="stylesheet">
   <!-- Favicon -->
-  <link rel="shortcut icon" href="img/favicon/favicon.png">
+  <link rel="shortcut icon" href="${request.contextPath}/macadmin/img/favicon/favicon.png">
   
   <script src="${request.contextPath}/macadmin/js/jquery.js"></script> <!-- jQuery -->
   <script src="${request.contextPath}/macadmin/js/bootstrap.min.js"></script> <!-- Bootstrap -->

@@ -10,6 +10,7 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	Team team
 
 	static transients = ['springSecurityService']
 
@@ -23,9 +24,7 @@ class User {
 	}
 
 	Set<Role> getAuthorities() {
-		def roles = new HashSet<Role>();
-		roles.add(Role.findAllByAuthority("ROLE_ADMIN"))
-		return roles
+		UserRole.findAllByUser(this).collect { it.role }
 	}
 
 	def beforeInsert() {
@@ -39,6 +38,11 @@ class User {
 	}
 
 	protected void encodePassword() {
-		password = springSecurityService.encodePassword(password)
+		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+	}
+	
+	@Override
+	public String toString() {
+		return "User (" + username + ")"
 	}
 }

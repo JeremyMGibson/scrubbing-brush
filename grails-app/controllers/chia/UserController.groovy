@@ -1,10 +1,11 @@
 package chia
 
-import javax.swing.SpringLayout.Constraints;
-
 import grails.plugin.springsecurity.annotation.Secured;
+import grails.transaction.Transactional;
 
-@Secured(["ROLE_ADMIN"])
+
+@Secured(['ROLE_ADMIN'])
 class UserController {
 	static scaffold = true
 }
+ 

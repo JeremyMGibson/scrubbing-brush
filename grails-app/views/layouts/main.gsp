@@ -139,6 +139,7 @@
 		  </sec:ifAnyGranted>
 		  <sec:ifAnyGranted roles="ROLE_ADMIN">
           	<li><a href="${request.contextPath}/user/"><i class="fa fa-user"></i> Users</a></li>
+          	<li><a href="${request.contextPath}/team/"><i class="fa fa-users"></i> Teams</a></li>
           	<li><a href="${request.contextPath}/tag/"><i class="fa fa-list"></i> Tags</a></li>
           </sec:ifAnyGranted>  
         </ul>

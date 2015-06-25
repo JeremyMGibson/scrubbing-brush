@@ -65,7 +65,7 @@ class Measure {
 		return fixedErrorData
 	}
 	
-	static hasMany = [results:MeasureResult, runs:MeasureRun, tags:Tag]
+	static hasMany = [results:MeasureResult, runs:MeasureRun, tags:Tag, responsibilities:Team]
 	
 	static mapping = {
 		query type: 'text'

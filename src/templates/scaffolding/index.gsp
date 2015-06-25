@@ -34,7 +34,7 @@
 					<div id="list-${domainClass.propertyName}" class="widget scaffold-list" role="main">
 						<div class="widget-content">
 							<g:if test="\${flash.message}">
-								<div class="message" role="status">\${flash.message}</div> 
+								<div class="alert alert-info" role="status">\${flash.message}</div> 
 							</g:if>
 							<div class="table-responsive">
 								<table class="table dataTable table-striped table-bordered table-hover">
